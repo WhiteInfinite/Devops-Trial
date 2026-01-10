@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: gemini-proxy
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: gemini-proxy
@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
       - name: gemini-api
-        image: liyan777/gem
-        imagePullPolicy: IfNotPresent
+        image: gemini-proxy:latest
+        imagePullPolicy: Never  # <--- Strictly use the local image
         ports:
         - containerPort: 8000
         env:
@@ -24,16 +24,3 @@ spec:
             secretKeyRef:
               name: gemini-secret
               key: api-key
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: gemini-service
-spec:
-  type: LoadBalancer
-  selector:
-    app: gemini-proxy
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 8000
