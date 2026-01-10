@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gemini-proxy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: gemini-proxy
+  template:
+    metadata:
+      labels:
+        app: gemini-proxy
+    spec:
+      containers:
+      - name: gemini-api
+        image: your-docker-username/gemini-proxy:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: GEMINI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: gemini-secret
+              key: api-key
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gemini-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: gemini-proxy
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8000
