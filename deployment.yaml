@@ -15,6 +15,7 @@ spec:
       containers:
       - name: gemini-api
         image: liyan777/gem
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8000
         env:
