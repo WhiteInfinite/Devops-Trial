@@ -14,13 +14,10 @@ spec:
     spec:
       containers:
       - name: gemini-api
-        image: local/gemini-proxy:latest
-        imagePullPolicy: Never  # <--- Strictly use the local image
+        image: gemini-proxy:latest
+        imagePullPolicy: Never # Force it to look at your 'docker images' list
         ports:
         - containerPort: 8000
         env:
         - name: GEMINI_API_KEY
-          valueFrom:
-            secretKeyRef:
-              name: gemini-secret
-              key: api-key
+          value: "AIzaSyD5doCWlOl-1lB8GkT0v6bUxnM5H0IITAA" # Temporary test
