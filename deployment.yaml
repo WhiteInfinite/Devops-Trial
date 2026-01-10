@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: gemini-api
-        image: gemini-proxy:latest
+        image: local/gemini-proxy:latest
         imagePullPolicy: Never  # <--- Strictly use the local image
         ports:
         - containerPort: 8000
