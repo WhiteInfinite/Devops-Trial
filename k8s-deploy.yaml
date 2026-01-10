@@ -19,7 +19,7 @@ spec:
         ports:
         - containerPort: 8000
         env:
-        - name: GEMINI_API_KEY
+        - name: AIzaSyD5doCWlOl-1lB8GkT0v6bUxnM5H0IITAA
           valueFrom:
             secretKeyRef:
               name: gemini-secret
